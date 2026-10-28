@@ -1,9 +1,11 @@
 package com.CodingShuttle.JobService.Exception;
 
 import org.springframework.http.HttpStatus;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class ApiError {
     private LocalDateTime timeStamp;
     private String error;

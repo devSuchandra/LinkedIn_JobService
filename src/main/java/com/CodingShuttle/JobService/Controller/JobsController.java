@@ -25,5 +25,10 @@ public class JobsController {
         JobDto created = jobService.createJob(request, recruiterId);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{jobId}")
+    public ResponseEntity<JobDto> getJob(@PathVariable Long jobId){
+        return ResponseEntity.ok(jobService.getJobById(jobId));
+    }
     
 }
