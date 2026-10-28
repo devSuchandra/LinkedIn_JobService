@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +33,13 @@ public class JobService {
         job.setRecruiterId(recruiterId);
         job.setJobStatus(JobStatus.OPEN);
 
-        Job savedJob = jobRepository.save(job);
+        Job savedJob;
+        try {
+            savedJob = jobRepository.save(job);
+        } catch (DataAccessException ex) {
+            log.error("Failed to create job for recruiter: {}", recruiterId, ex);
+            throw ex;
+        }
         log.info("Job created by recruiter: {} with ID: {}", recruiterId, savedJob.getId());
         return modelMapper.map(savedJob, JobDto.class);
     }

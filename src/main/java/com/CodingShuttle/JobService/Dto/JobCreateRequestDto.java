@@ -36,6 +36,7 @@ public class JobCreateRequestDto {
     @NotNull(message = "must be one of INTERN, ENTRY, MID, SENIOR, LEAD, EXECUTIVE")
     private ExperienceLevel experienceLevel;
 
+    @NotNull(message = "must not be null")
     @Min(value = 0, message = "must not be negative")
     @Max(value = 60, message = "must be at most 60")
     private Integer minRequiredExperienceYears;
