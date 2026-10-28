@@ -30,5 +30,15 @@ public class JobsController {
     public ResponseEntity<JobDto> getJob(@PathVariable Long jobId){
         return ResponseEntity.ok(jobService.getJobById(jobId));
     }
+
+    @PatchMapping("/{jobId}/close")
+    public ResponseEntity<Void> closeJob(
+            @PathVariable Long jobId,
+            @RequestAttribute(JwtAuthFilter.USER_ID_ATTRIBUTE) Long callerId){
+
+        jobService.closeJob(jobId, callerId);
+        return ResponseEntity.noContent().build();
+    }
+
     
 }
