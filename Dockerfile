@@ -18,4 +18,4 @@ USER spring:spring
 
 COPY --from=build /build/target/*.jar app.jar
 EXPOSE 9040
-ENTRYPOINT ["java","-XX:MaxRAMPercentage=70.0","-jar","/app.jar"]
+ENTRYPOINT ["java","-XX:MaxRAMPercentage=70.0","-jar","/app/app.jar"]
